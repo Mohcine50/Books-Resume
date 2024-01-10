@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './../services/auth.service';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { JwtService } from '../services/jwt.service';
 
 @Injectable({
@@ -28,11 +34,18 @@ export class AuthGuard implements CanActivate {
     });
   }
 
-  canActivate(): boolean | UrlTree {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree {
+    const nextPath = next.routeConfig?.path;
+    console.log(nextPath);
     if (this.isAuthenticated) {
-      return true;
+      if (nextPath !== 'sign-in' && nextPath !== 'sign-up') return true;
+      else return this.router.createUrlTree(['sign-in']);
     } else {
-      return this.router.createUrlTree(['/sign-in']);
+      if (nextPath === 'sign-in' || nextPath === 'sign-up') return true;
+      else return this.router.createUrlTree(['sign-in']);
     }
   }
 }
