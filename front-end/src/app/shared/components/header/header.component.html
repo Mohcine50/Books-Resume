@@ -1,0 +1,34 @@
+<div class="flex justify-between items-center p-2 border-b-gray-200 border">
+  <div>
+    <h1 class="text-2xl flex items-center gap-2 font-bold">
+      <span class="text-blue-700"
+        ><fa-icon [icon]="faBookOpen" size="1x" title="BookiFy"
+      /></span>
+      BookiFy
+    </h1>
+  </div>
+  <nav>
+    <ul class="flex items-center gap-4 text-base font-medium">
+      <li>
+        <a [routerLink]="['/']"> Home </a>
+      </li>
+      <li>
+        <a href="#how-it-works"> How it works </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="flex items-center gap-2">
+    <button
+      class="px-3 py-2 bg-blue-100 border border-blue-500 rounded-lg text-base text-blue-500 font-medium"
+    >
+      Contact us
+    </button>
+    <button
+      class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
+    >
+      <fa-icon [icon]="faRightToBracket" class="mr-1" />
+      <a [routerLink]="['/sign-in']"></a>
+      Sign In
+    </button>
+  </div>
+</div>
