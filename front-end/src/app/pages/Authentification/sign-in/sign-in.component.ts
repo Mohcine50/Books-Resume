@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +11,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './sign-in.component.html',
 })
 export class SignInComponent {
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   signInForm = new FormGroup({
     username: new FormControl(''),
@@ -19,5 +20,22 @@ export class SignInComponent {
 
   login = (e: Event) => {
     e.preventDefault();
+    this.authService
+      .login(
+        this.signInForm.controls['username'].value as string,
+        this.signInForm.controls['password'].value as string
+      )
+      .subscribe({
+        next: (response) => {
+          if (
+            response.accessToken !== undefined ||
+            response.accessToken !== null
+          ) {
+            localStorage.setItem('accessToken', response.accessToken);
+            this.authService.setAuthentication(true);
+            this.router.navigate(['/']);
+          }
+        },
+      });
   };
 }

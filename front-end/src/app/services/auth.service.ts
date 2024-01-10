@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -11,7 +10,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 export class AuthService {
   isAuth: boolean = false;
 
-  authUrl = `${process.env['API_KEY']}/api/auth`;
+  authUrl = `http://localhost:8080/api/auth`;
   constructor(private httpClient: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
@@ -38,8 +37,5 @@ export class AuthService {
 
   isAuthenticated(): Observable<boolean> {
     return of(this.isAuth);
-  }
-  isAdmin(): boolean {
-    return false;
   }
 }
