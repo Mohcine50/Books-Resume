@@ -41,8 +41,9 @@ export class AuthGuard implements CanActivate {
     const nextPath = next.routeConfig?.path;
     console.log(nextPath);
     if (this.isAuthenticated) {
-      if (nextPath !== 'sign-in' && nextPath !== 'sign-up') return true;
-      else return this.router.createUrlTree(['sign-in']);
+      if (nextPath === 'sign-in' || nextPath === 'sign-up')
+        return this.router.createUrlTree(['dashboard']);
+      else return true;
     } else {
       if (nextPath === 'sign-in' || nextPath === 'sign-up') return true;
       else return this.router.createUrlTree(['sign-in']);

@@ -33,7 +33,7 @@ export class SignInComponent {
           ) {
             localStorage.setItem('accessToken', response.accessToken);
             this.authService.setAuthentication(true);
-            this.router.navigate(['/']);
+            this.router.navigate(['dashboard']);
           }
         },
       });
