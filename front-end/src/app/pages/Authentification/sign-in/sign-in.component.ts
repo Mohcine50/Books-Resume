@@ -21,10 +21,10 @@ export class SignInComponent {
   login = (e: Event) => {
     e.preventDefault();
     this.authService
-      .login(
-        this.signInForm.controls['username'].value as string,
-        this.signInForm.controls['password'].value as string
-      )
+      .login({
+        username: this.signInForm.controls['username'].value as string,
+        password: this.signInForm.controls['password'].value as string,
+      })
       .subscribe({
         next: (response) => {
           if (response.Message === 'Login Successfully') {
