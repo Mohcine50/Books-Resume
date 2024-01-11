@@ -67,9 +67,6 @@ public class BookResumeApplication {
 
 
             accountService.addRoleToUser("admin", "ADMIN");
-            //accountService.addRoleToUser("admin", "USER");
-            //accountService.addRoleToUser("user", "USER");
-            //accountService.addRoleToUser("manager", "USER");
 
         };
     }

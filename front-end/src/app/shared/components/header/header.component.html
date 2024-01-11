@@ -15,14 +15,12 @@
       <li>
         <a> How it works </a>
       </li>
+      <li>
+        <a> Contact Us </a>
+      </li>
     </ul>
   </nav>
   <div class="flex items-center gap-2">
-    <button
-      class="px-3 py-2 bg-blue-100 border border-blue-500 rounded-lg text-base text-blue-500 font-medium"
-    >
-      Contact us
-    </button>
     <button
       *ngIf="!(isAuthenticated$ | async); else notAuthenticated"
       class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
@@ -32,16 +30,15 @@
     </button>
     <ng-template #notAuthenticated>
       <button
-        class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
+        class="px-3 py-2 bg-blue-100 border border-blue-500 rounded-lg text-base text-blue-500 font-medium"
       >
-        <fa-icon [icon]="faRightToBracket" class="mr-1" />
         <a [routerLink]="['/dashboard']">Dashboard</a>
       </button>
       <button
         class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
         (click)="logout()"
       >
-        <fa-icon [icon]="faRightToBracket" class="mr-1" />
+        <fa-icon [icon]="faRightToBracket" class="mr-1" [flip]="'horizontal'" />
         Logout
       </button>
     </ng-template>
