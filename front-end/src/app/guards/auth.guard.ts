@@ -39,7 +39,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | UrlTree {
     const nextPath = next.routeConfig?.path;
-    console.log(nextPath);
+    const path = state.url;
+    if (path === '/' || nextPath === '/') return true;
     if (this.isAuthenticated) {
       if (nextPath === 'sign-in' || nextPath === 'sign-up')
         return this.router.createUrlTree(['dashboard']);
