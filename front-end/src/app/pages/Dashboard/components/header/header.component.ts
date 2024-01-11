@@ -19,8 +19,11 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   faBookOpen = faBookOpen;
   faSearch = faSearch;
+  user?: string;
   constructor(private authService: AuthService) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.authService.getUser();
+  }
 
   logout = () => {
     this.authService.logout().subscribe(() => {

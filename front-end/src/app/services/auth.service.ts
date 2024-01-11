@@ -5,15 +5,16 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { loginType, registerType } from '../types';
+import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  user: string = '';
   authUrl = `http://localhost:8080/api/auth`;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private jwtService: JwtService) {}
 
   testGetAllUsers(): Observable<any> {
     return this.httpClient
@@ -85,5 +86,11 @@ export class AuthService {
 
   isAuthenticated(): Observable<boolean> {
     return this.isAuth.asObservable();
+  }
+  getUser(): string {
+    let accessToken = localStorage.getItem('accessToken');
+    let token = this.jwtService.decodeToken(accessToken!);
+    this.user = this.jwtService.getUserFromToken(token);
+    return this.user;
   }
 }

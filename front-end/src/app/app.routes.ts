@@ -6,6 +6,8 @@ import { SignUpComponent } from './pages/Authentification/sign-up/sign-up.compon
 import { AuthentificationComponent } from './pages/Authentification/authentification.component';
 import { NotFoundComponent } from './pages/Not Found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { WorkComponent } from './pages/work/work.component';
 
 export const routes: Routes = [
   {
@@ -22,9 +24,13 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: 'profile', component: ProfileComponent },
+      { path: 'dashboard', component: WorkComponent },
+    ],
   },
   { path: '404', component: NotFoundComponent },
 ];
