@@ -24,10 +24,26 @@
       Contact us
     </button>
     <button
+      *ngIf="!(isAuthenticated$ | async); else notAuthenticated"
       class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
     >
       <fa-icon [icon]="faRightToBracket" class="mr-1" />
       <a [routerLink]="['/sign-in']">Sign In</a>
     </button>
+    <ng-template #notAuthenticated>
+      <button
+        class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
+      >
+        <fa-icon [icon]="faRightToBracket" class="mr-1" />
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </button>
+      <button
+        class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium"
+        (click)="logout()"
+      >
+        <fa-icon [icon]="faRightToBracket" class="mr-1" />
+        Logout
+      </button>
+    </ng-template>
   </div>
 </div>

@@ -27,13 +27,10 @@ export class SignInComponent {
       )
       .subscribe({
         next: (response) => {
-          if (
-            response.accessToken !== undefined ||
-            response.accessToken !== null
-          ) {
+          if (response.Message === 'Login Successfully') {
             localStorage.setItem('accessToken', response.accessToken);
             this.authService.setAuthentication(true);
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['/dashboard']);
           }
         },
       });

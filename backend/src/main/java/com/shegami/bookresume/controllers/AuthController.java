@@ -105,14 +105,6 @@ public class AuthController {
     }
 
 
-    @PostMapping("logout")
-    public ResponseEntity<Object> logout(HttpServletRequest request) {
-        // Perform logout actions, such as token invalidation or session cleanup
-        Map<String, String> map = new HashMap<>();
 
-        map.put("Message", "Logout Successfully");
-
-        return ResponseEntity.ok(map);
-    }
 
 }

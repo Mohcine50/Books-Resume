@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -8,7 +9,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
   providedIn: 'root',
 })
 export class AuthService {
-  isAuth: boolean = false;
+  isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   authUrl = `http://localhost:8080/api/auth`;
   constructor(private httpClient: HttpClient) {}
@@ -21,6 +22,10 @@ export class AuthService {
         headers: new HttpHeaders().append('Content-Type', 'application/json'),
       })
       .pipe(
+        tap((response: any) => {
+          // Log the successful response
+          console.log('Response:', response);
+        }),
         catchError((error: any, caught: Observable<any>): Observable<any> => {
           console.error('There was an error!', error);
 
@@ -31,11 +36,16 @@ export class AuthService {
       );
   }
 
+  logout(): Observable<any> {
+    this.setAuthentication(false);
+    return this.isAuth.asObservable();
+  }
+
   setAuthentication(auth: boolean) {
-    this.isAuth = auth;
+    this.isAuth.next(auth);
   }
 
   isAuthenticated(): Observable<boolean> {
-    return of(this.isAuth);
+    return this.isAuth.asObservable();
   }
 }
