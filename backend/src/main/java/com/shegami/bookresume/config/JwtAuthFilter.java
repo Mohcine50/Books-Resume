@@ -3,9 +3,11 @@ package com.shegami.bookresume.config;
 import com.nimbusds.jose.shaded.gson.JsonObject;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.apache.juli.logging.Log;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -16,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.*;
 import java.time.Instant;
+import java.util.logging.Logger;
 
 import static com.shegami.bookresume.Utils.RequestManagement.resolveToken;
 import static com.shegami.bookresume.Utils.RequestManagement.writeResponse;
@@ -46,8 +49,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        jwtToken = resolveToken(request);
 
+        jwtToken = resolveToken(request);
 
         if (jwtToken == null) {
             jsonObject.addProperty("Message", "NO TOKEN PROVIDED");

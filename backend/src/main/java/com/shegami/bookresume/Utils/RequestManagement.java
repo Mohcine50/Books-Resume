@@ -1,6 +1,7 @@
 package com.shegami.bookresume.Utils;
 
 import com.nimbusds.jose.shaded.gson.JsonObject;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -11,11 +12,14 @@ public class RequestManagement {
 
     public static String resolveToken(HttpServletRequest request) {
 
-        String token = request.getHeader("Authorization");
-
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            return token;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("accessToken".equals(cookie.getName())) {
+                    String jwtToken = cookie.getValue();
+                    return jwtToken;
+                }
+            }
         }
         return null;
     }

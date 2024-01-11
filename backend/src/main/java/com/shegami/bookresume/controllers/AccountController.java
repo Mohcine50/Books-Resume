@@ -4,6 +4,7 @@ import com.shegami.bookresume.entities.AppUser;
 import com.shegami.bookresume.entities.Role;
 import com.shegami.bookresume.models.RoleToUser;
 import com.shegami.bookresume.services.AccountService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RestController
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-@RequestMapping(path = "/api/users")
+@RequestMapping(path = "api/users")
 public class AccountController {
 
     private final AccountService accountService;
@@ -28,11 +29,12 @@ public class AccountController {
     }
 
 
+
     @GetMapping("all")
     @ResponseBody
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    public List<AppUser> allUsers() {
-        return accountService.listUser();
+    public ResponseEntity<List<AppUser>> allUsers() {
+        return new ResponseEntity<>(accountService.listAllUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("id/{id}")
@@ -55,7 +57,7 @@ public class AccountController {
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
 
-    @PostMapping(path = "/add-user")
+    @PostMapping("add-user")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<AppUser> addUser(@RequestBody AppUser appUser) {
 
@@ -65,7 +67,7 @@ public class AccountController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/delete-user/{id}")
+    @DeleteMapping("delete-user/{id}")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> deleteUser(@PathVariable String id) {
 
@@ -74,7 +76,7 @@ public class AccountController {
         return new ResponseEntity<>(Map.of("Message", "User Deleted Successfully"), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/add-role")
+    @PostMapping("add-role")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> addRole(@RequestBody Role role) {
 
@@ -83,7 +85,7 @@ public class AccountController {
         return new ResponseEntity<>(addedRole, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/add-role-to-user")
+    @PostMapping("add-role-to-user")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> addRoleToUser(@RequestBody RoleToUser roleToUser) {
 
@@ -92,7 +94,7 @@ public class AccountController {
         return new ResponseEntity<>(Map.of("Message", "Role added To user Successfully"), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/delete-role-from-user")
+    @DeleteMapping("delete-role-from-user")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> deleteRoleFromUser(@RequestBody RoleToUser roleToUser) {
 
@@ -101,7 +103,7 @@ public class AccountController {
         return new ResponseEntity<>(Map.of("Message", "Role deleted To user Successfully"), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/delete-role/{id}")
+    @DeleteMapping("delete-role/{id}")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> deleteRole(@PathVariable String id) {
 

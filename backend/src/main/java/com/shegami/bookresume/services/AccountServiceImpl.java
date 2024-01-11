@@ -130,7 +130,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AppUser> listUser() {
+    public List<AppUser> listAllUsers() {
         return appUserRepository.findAll();
     }
 

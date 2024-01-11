@@ -20,7 +20,7 @@ public interface AccountService {
 
     AppUser loadUserByUsername(String username);
 
-    List<AppUser> listUser();
+    List<AppUser> listAllUsers();
 
     void deleteRole(String id);
 
