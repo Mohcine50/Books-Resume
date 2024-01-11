@@ -14,12 +14,30 @@ export class AuthService {
   authUrl = `http://localhost:8080/api/auth`;
   constructor(private httpClient: HttpClient) {}
 
+  testGetAllUsers(): Observable<any> {
+    return this.httpClient
+      .get(
+        `http://localhost:8080/api/users/id/d0558db3-6dae-4fbc-9d76-9dcc6a5c4ad5`,
+        { withCredentials: true }
+      )
+      .pipe(
+        tap((response) => {
+          console.log(response);
+        }),
+        catchError((error: any, caught: Observable<any>): Observable<any> => {
+          console.error('There was an error!', error);
+          return of();
+        })
+      );
+  }
+
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
 
     return this.httpClient
       .post(`${this.authUrl}/login`, JSON.stringify(body), {
         headers: new HttpHeaders().append('Content-Type', 'application/json'),
+        withCredentials: true,
       })
       .pipe(
         tap((response: any) => {
