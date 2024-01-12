@@ -5,27 +5,18 @@
     My Books
   </h2>
   <div class="flex flex-col gap-1">
-    <div
+    <a
       class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
+      *ngFor="let book of books"
+      [routerLink]="['books', book.id]"
+      [routerLinkActive]="[
+        'text-black',
+        'bg-gray-100',
+        'border',
+        'border-gray-200'
+      ]"
     >
-      Flex you mentality
-    </div>
-    <div
-      class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
-    >
-      The twilight
-    </div>
-    <div
-      class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
-    >
-      <a [routerLink]="['/dashboard/books', 'nncjdcnsdc8dsc']">Iron man</a>
-    </div>
-    <div
-      class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
-    >
-      <a [routerLink]="['/dashboard/books', 'nncjdcnsdcscscs8dsc']"
-        >Computer science</a
-      >
-    </div>
+      {{ book.name }}
+    </a>
   </div>
 </div>

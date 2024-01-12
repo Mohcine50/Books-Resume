@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
   styles: ``,
 })
 export class ResumePanelComponent {
-  @Input()
-  id?: string;
+  @Input() id?: string;
   @Input() username?: string;
 }

@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CommonModule } from '@angular/common';
 import {
   ActivatedRoute,
+  ParamMap,
   Router,
   RouterModule,
   RouterOutlet,
