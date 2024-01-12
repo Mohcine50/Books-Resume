@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,4 +9,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './resume-panel.component.html',
   styles: ``,
 })
-export class ResumePanelComponent {}
+export class ResumePanelComponent {
+  @Input()
+  id?: string;
+  @Input() username?: string;
+}

@@ -1,5 +1,6 @@
-<div class="grid grid-cols-[1fr_1fr_3fr] gap-2 min-h-full grid-flow-col px-3">
-  <books-panel></books-panel>
-  <chapters-panel></chapters-panel>
-  <resume-panel></resume-panel>
+<div class="grid grid-cols-[1fr_4fr] gap-2 min-h-full grid-flow-col px-3">
+  <div><books-panel></books-panel></div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

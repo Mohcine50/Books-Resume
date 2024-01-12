@@ -8,6 +8,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { WorkComponent } from './pages/work/work.component';
 import { AuthenticationComponent } from './pages/Authentification/authentication.component';
 import { SignInComponent } from './pages/Authentification/sign-in/sign-in.component';
+import { ChaptersPanelComponent } from './pages/work/components/chapters-panel/chapters-panel.component';
+import { BooksPanelComponent } from './pages/work/components/books-panel/books-panel.component';
 
 export const routes: Routes = [
   {
@@ -36,7 +38,21 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: WorkComponent, pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        component: WorkComponent,
+        children: [
+          {
+            path: 'books/:id',
+            component: ChaptersPanelComponent,
+          },
+          {
+            path: 'books',
+            redirectTo: '',
+          },
+        ],
+      },
+
       { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
     ],
   },

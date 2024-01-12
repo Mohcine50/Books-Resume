@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  RouterModule,
+  Router,
+  ParamMap,
+} from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'books-panel',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './books-panel.component.html',
-  styles: ``,
 })
 export class BooksPanelComponent {}
