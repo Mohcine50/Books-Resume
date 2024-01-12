@@ -33,4 +33,8 @@ export class BooksPanelComponent {
       console.log(params.get('id'));
     });
   }
+
+  addBook() {
+    this.books.push({ name: 'harry potter', id: 'sdòcksdocjwq8' });
+  }
 }

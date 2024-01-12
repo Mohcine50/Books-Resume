@@ -1,5 +1,6 @@
 package com.shegami.bookresume.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,26 +16,17 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "users")
-public class AppUser {
-
+@Table(name = "books")
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String email;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private String name;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Book> books = new ArrayList<>();
+    private Collection<Chapter> chapters = new ArrayList<>();
+
 
 }

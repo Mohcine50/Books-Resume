@@ -62,8 +62,8 @@ public class BookResumeApplication {
             accountService.addNewRole(new Role(null, "ADMIN"));
             accountService.addNewRole(new Role(null, "USER"));
 
-            accountService.addNewUser(new AppUser(null, "admin", "admin@gmail.com", "123456789", null));
-            accountService.addNewUser(new AppUser(null, "user", "user@gmail.com", "123456789", null));
+            accountService.addNewUser(new AppUser(null, "admin", "admin@gmail.com", "123456789", null, null));
+            accountService.addNewUser(new AppUser(null, "user", "user@gmail.com", "123456789", null, null));
 
 
             accountService.addRoleToUser("admin", "ADMIN");

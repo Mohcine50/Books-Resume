@@ -51,7 +51,7 @@ public class AuthController {
         Map<String, String> map = new HashMap<>();
 
         accountService.addNewUser(new AppUser(null, registerAuthManager.getUsername(), registerAuthManager.getEmail(),
-                registerAuthManager.getPassword(), new ArrayList<>()));
+                registerAuthManager.getPassword(), new ArrayList<>(), new ArrayList<>()));
 
 
         map.put("Message", "REGISTER SUCCESSFULLY");

@@ -5,6 +5,11 @@
     <h2 class="text-lg font-montserrat font-medium text-gray-900 text-center">
       Book Chapters
     </h2>
+    <button
+      class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium w-fit ml-auto"
+    >
+      New Chapter
+    </button>
     <div class="flex flex-col gap-1">
       <a
         class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
@@ -12,7 +17,6 @@
         [queryParams]="{ chapter: '8e38e723e28' }"
         [ngClass]="{'text-black': chapterId==='8e38e723e28',
       'bg-gray-100': chapterId==='8e38e723e28',
-      'border': chapterId==='8e38e723e28',
       'border-gray-200': chapterId==='8e38e723e28',
       }"
       >
