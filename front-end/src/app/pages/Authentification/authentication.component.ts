@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
-  selector: 'app-authentification',
+  selector: 'app-authentication',
   standalone: true,
   imports: [CommonModule, RouterModule, HeaderComponent],
-  templateUrl: './authentification.component.html',
+  templateUrl: './authentication.component.html',
 })
-export class AuthentificationComponent {}
+export class AuthenticationComponent {}
