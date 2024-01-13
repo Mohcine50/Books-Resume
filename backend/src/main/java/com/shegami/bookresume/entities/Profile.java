@@ -24,14 +24,20 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    private String firstName;
+    private String lastName;
+
     @Column(nullable = false)
     private String email;
 
     private String image;
 
+    private String bio;
+
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
+    
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 

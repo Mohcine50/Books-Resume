@@ -2,14 +2,16 @@
   <div
     class="flex flex-col gap-5 min-h-full h-full px-4 py-3 border-r border-gray-100"
   >
-    <h2 class="text-lg font-montserrat font-medium text-gray-900 text-center">
-      Book Chapters
-    </h2>
-    <button
-      class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium w-fit ml-auto"
-    >
-      New Chapter
-    </button>
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-montserrat font-medium text-gray-900 text-center">
+        Book Chapters
+      </h2>
+      <button
+        class="px-3 py-2 bg-blue-600 rounded-lg text-white text-base font-medium w-fit ml-auto"
+      >
+        New Chapter
+      </button>
+    </div>
     <div class="flex flex-col gap-1">
       <a
         class="text-base text-gray-600 px-3 p-2 hover:bg-gray-100 border border-white hover:border hover:border-gray-200 cursor-pointer rounded-md hover:text-black transition duration-100 ease-linear"
@@ -25,6 +27,6 @@
     </div>
   </div>
   <div>
-    <resume-panel [id]="chapterId" [username]="chapterId"></resume-panel>
+    <resume-panel [content]="chapterId!"></resume-panel>
   </div>
 </div>

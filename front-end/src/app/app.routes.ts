@@ -10,6 +10,8 @@ import { AuthenticationComponent } from './pages/Authentification/authentication
 import { SignInComponent } from './pages/Authentification/sign-in/sign-in.component';
 import { ChaptersPanelComponent } from './pages/work/components/chapters-panel/chapters-panel.component';
 import { BooksPanelComponent } from './pages/work/components/books-panel/books-panel.component';
+import { BooksComponent } from './pages/profile/components/books/books.component';
+import { SettingsComponent } from './pages/profile/components/settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -53,7 +55,19 @@ export const routes: Routes = [
         ],
       },
 
-      { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'settings',
+            pathMatch: 'full',
+          },
+          { path: 'books', component: BooksComponent, pathMatch: 'full' },
+          { path: 'settings', component: SettingsComponent, pathMatch: 'full' },
+        ],
+      },
     ],
   },
 

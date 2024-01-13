@@ -52,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
                         .build()
         );
 
-        System.out.println(profile);
 
         AppUser newUser = AppUser.builder()
                 .username(appUser.getUsername())

@@ -10,5 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProfileDto {
     String email ;
+    String firstName;
+    String lastName;
+    String bio;
     String image = null;
 }
