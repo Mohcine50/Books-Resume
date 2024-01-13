@@ -1,7 +1,5 @@
 package com.shegami.bookresume.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,18 +17,17 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "books")
-public class Book {
+@Table(name = "profiles")
+public class Profile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false)
-    private String name;
+    private String email;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Chapter> chapters = new ArrayList<>();
-
+    private String image;
 
     @Column(updatable = false)
     @CreationTimestamp
@@ -38,4 +35,10 @@ public class Book {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private Collection<Book> books = new ArrayList<>();
+
+
+    @OneToOne(mappedBy = "profile")
+    private AppUser user;
 }

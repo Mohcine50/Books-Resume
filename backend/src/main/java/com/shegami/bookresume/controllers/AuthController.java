@@ -1,11 +1,14 @@
 package com.shegami.bookresume.controllers;
 
 import com.shegami.bookresume.entities.AppUser;
+import com.shegami.bookresume.entities.Profile;
 import com.shegami.bookresume.exceptions.NotFoundException;
 import com.shegami.bookresume.models.AuthManager;
+import com.shegami.bookresume.models.ProfileDto;
 import com.shegami.bookresume.models.RegisterAuthManager;
 import com.shegami.bookresume.repositories.AppUserRepository;
 import com.shegami.bookresume.services.AccountService;
+import com.shegami.bookresume.services.ProfileService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -50,8 +53,11 @@ public class AuthController {
 
         Map<String, String> map = new HashMap<>();
 
-        accountService.addNewUser(new AppUser(null, registerAuthManager.getUsername(), registerAuthManager.getEmail(),
-                registerAuthManager.getPassword(), new ArrayList<>(), new ArrayList<>()));
+
+        AppUser user =  new AppUser(null, registerAuthManager.getUsername(), registerAuthManager.getEmail(),
+                registerAuthManager.getPassword(), new ArrayList<>(), null);
+
+        accountService.addNewUser(user);
 
 
         map.put("Message", "REGISTER SUCCESSFULLY");

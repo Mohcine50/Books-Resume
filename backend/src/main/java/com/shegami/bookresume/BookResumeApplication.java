@@ -55,6 +55,7 @@ public class BookResumeApplication {
         return NimbusJwtDecoder.withPublicKey(rsaKeysConfig.publicKey()).build();
     }
 
+    /**
     CommandLineRunner commandLineRunner(AccountService accountService) {
 
         return args -> {
@@ -69,5 +70,5 @@ public class BookResumeApplication {
             accountService.addRoleToUser("admin", "ADMIN");
 
         };
-    }
+    } */
 }

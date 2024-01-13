@@ -1,9 +1,11 @@
 package com.shegami.bookresume.services;
 
 import com.shegami.bookresume.entities.AppUser;
+import com.shegami.bookresume.entities.Profile;
 import com.shegami.bookresume.entities.Role;
 import com.shegami.bookresume.exceptions.ApiRequestException;
 import com.shegami.bookresume.exceptions.NotFoundException;
+import com.shegami.bookresume.models.ProfileDto;
 import com.shegami.bookresume.repositories.AppUserRepository;
 import com.shegami.bookresume.repositories.RoleRepository;
 import jakarta.transaction.Transactional;
@@ -22,15 +24,19 @@ public class AccountServiceImpl implements AccountService {
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ProfileService profileService;
 
-    public AccountServiceImpl(AppUserRepository appUserRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+
+    public AccountServiceImpl(AppUserRepository appUserRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, ProfileService profileService) {
         this.appUserRepository = appUserRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.profileService = profileService;
     }
 
     @Override
     public AppUser addNewUser(AppUser appUser) {
+
 
 
         AppUser user = appUserRepository.findByUsername(appUser.getUsername());
@@ -40,11 +46,20 @@ public class AccountServiceImpl implements AccountService {
 
         Role role = roleRepository.findByName("USER");
 
+        Profile profile = profileService.createProfile(
+                ProfileDto.builder()
+                        .email(appUser.getEmail())
+                        .build()
+        );
+
+        System.out.println(profile);
+
         AppUser newUser = AppUser.builder()
                 .username(appUser.getUsername())
                 .password(passwordEncoder.encode(appUser.getPassword()))
                 .email(appUser.getEmail())
                 .roles(List.of(role))
+                .profile(profile)
                 .build();
 
 
